@@ -38,8 +38,8 @@ const HomePage = () => {
   };
 
   const renderTaskList = (tasks, emptyMessage) => {
-    if (tasks.length === 0) {
-      return <div className="empty-state">{emptyMessage}</div>;
+    if (!tasks || tasks.length === 0) {
+      return <div style={{ color: "gray" }}>{emptyMessage}</div>;
     }
     return tasks.map((task) => (
       <TaskItem
@@ -54,39 +54,31 @@ const HomePage = () => {
   };
 
   return (
-    <div className="page-container animate-slide-up">
-      <header className="page-header">
+    <div style={{ padding: "2rem" }}>
+      <header style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
           <h1>Your Workspace</h1>
-          <p className="subtitle">
-            Manage your day with elegance and efficiency.
-          </p>
+          <p>Manage your day with elegance and efficiency.</p>
         </div>
-        <button className="btn btn-primary" onClick={openNewTaskForm}>
+        <button onClick={openNewTaskForm}>
           <Plus size={20} /> Add New Task
         </button>
       </header>
 
-      <div className="task-board">
-        <section className="task-column">
+      <div style={{ display: "flex", gap: "2rem", marginTop: "2rem" }}>
+        <section>
           <h2>Ongoing</h2>
-          <div className="task-list">
-            {renderTaskList(getOngoingTasks(), "No ongoing tasks.")}
-          </div>
+          {renderTaskList(getOngoingTasks(), "No ongoing tasks.")}
         </section>
 
-        <section className="task-column">
+        <section>
           <h2>Scheduled</h2>
-          <div className="task-list">
-            {renderTaskList(getScheduledTasks(), "No scheduled tasks.")}
-          </div>
+          {renderTaskList(getScheduledTasks(), "No scheduled tasks.")}
         </section>
 
-        <section className="task-column">
+        <section>
           <h2>Completed</h2>
-          <div className="task-list">
-            {renderTaskList(getCompletedTasks(), "No completed tasks yet.")}
-          </div>
+          {renderTaskList(getCompletedTasks(), "No completed tasks yet.")}
         </section>
       </div>
 

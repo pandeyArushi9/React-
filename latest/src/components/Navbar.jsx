@@ -10,21 +10,26 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="navbar glass-panel">
-      <div className="navbar-brand">
-        <CheckCircle2 className="brand-icon" size={28} />
-        <h2>Todo-List</h2>
+    <nav className="flex items-center justify-between px-6 py-3 bg-gray-900 text-white shadow-md">
+      {/* Brand */}
+      <div className="flex items-center gap-2">
+        <CheckCircle2 size={28} className="text-green-400" />
+        <h2 className="text-xl font-bold">Todo-List</h2>
       </div>
-      <div className="navbar-links">
+
+      {/* Links */}
+      <div className="flex gap-6">
         {navItems.map((item) => (
           <Link
             key={item.path}
             to={item.path}
-            className={`nav-link ${
-              location.pathname === item.path ? "active" : ""
+            className={`flex items-center gap-2 px-3 py-2 rounded-md transition ${
+              location.pathname === item.path
+                ? "bg-green-600 text-white"
+                : "hover:bg-gray-700"
             }`}
           >
-            <item.icon size={20} className="nav-icon" />
+            <item.icon size={20} />
             <span>{item.label}</span>
           </Link>
         ))}
